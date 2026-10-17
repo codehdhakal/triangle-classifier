@@ -61,19 +61,23 @@ the spec warns against into the test suite.
 
 ## Acceptance criteria
 
-Rewritten from the customer's paragraph ("school-grade riddle ... tell them
-the shape and whether it's buildable ... don't crash ... flag right-angle
-places ... correct every time"):
+Rewritten from the customer's paragraph ("We run a stained-glass studio.
+Customers enter three side lengths and we tell them the shape and whether
+it's buildable. If it's not a valid triangle, show a message, don't crash.
+Also flag right-angle pieces — they need reinforced corners. It has to be
+correct every time; a wrong answer means a ruined pane."):
 
 1. **Correct shape, every time** — for any three numeric side lengths,
    `classify_triangle` returns exactly the spec-table label, including the
    `"Right "` prefix for Pythagorean triples within tolerance
-   (e.g. `classify_triangle(3, 4, 5) == "Right Scalene"`).
+   (e.g. `classify_triangle(3, 4, 5) == "Right Scalene"`); a wrong label
+   means a ruined pane.
 2. **Invalid input never crashes** — for any side ≤ 0, a violated or
    degenerate triangle inequality, or non-numeric input,
-   `classify_triangle` returns `"Invalid"` instead of raising an exception.
-3. **Right angles are flagged** — any valid right triangle's label starts
-   with `"Right "`, so the riddle app can mark those entries as needing
+   `classify_triangle` returns the `"Invalid"` message instead of raising
+   an exception.
+3. **Right-angle pieces are flagged** — any valid right triangle's label
+   starts with `"Right "`, so the studio can mark those pieces as needing
    reinforced corners.
 
 `test_acceptance.py` covers criteria 1–2 end to end through `classify_triangle`.
